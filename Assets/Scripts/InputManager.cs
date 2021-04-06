@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Gyroscope = UnityEngine.InputSystem.Gyroscope;
+using Unity.Mathematics;
 
 public class InputManager : MonoBehaviour
 {
-    public float HorizontalRotation => _yAxis;
+    public float HorizontalRotation => Mathf.Deg2Rad * _yAxis;
 
     public static InputManager instance
     {
