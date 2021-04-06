@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private enum MovementType
+    [SerializeField]
+    private float _slideSpeed = 0.01f;
+    private float _acceleration = 0.0f;
+    private InputManager _inputManager;
+    private Transform _transform = null;
+
+    private void CalcAcceleration(float deltaTime)
     {
-        LEFT,
-        RIGHT,
-        NONE,
+        var hRotation = _inputManager.HorizontalRotation;
+        if (hRotation <= 3.13f)
+        {
+            _acceleration = 1.0f;
+        }
+        else
+        {
+            _acceleration = -1.0f;
+        }
     }
 
-    private MovementType _movementType = MovementType.NONE;
-    private InputManager _inputManager;
+    private void ProcessMovement(float deltaTime)
+    {
+        transform.position = transform.position + new Vector3(_acceleration * deltaTime * _slideSpeed, 0, transform.position.z);;
+    }
     void Start()
     {
         _inputManager = InputManager.instance;
     }
     void Update()
     {
-        Debug.Log(_inputManager.HorizontalRotation.ToString());
+        CalcAcceleration(Time.deltaTime);
+        ProcessMovement(Time.deltaTime);
     }
 }
