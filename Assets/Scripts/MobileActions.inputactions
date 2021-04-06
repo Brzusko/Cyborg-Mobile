@@ -1,0 +1,33 @@
+{
+    "name": "MobileActions",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "44fa72d8-60fc-4771-b188-662b90283ded",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "7c4b61da-8abe-4012-824b-6864af42b9d5",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2d34436a-7074-4655-81df-5491ababc505",
+                    "path": "<Gyroscope>/angularVelocity",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
