@@ -314,6 +314,7 @@ MonoBehaviour:
   _liquidPrefab: {fileID: 1307052388517864061, guid: 52adad1e05aa55349a921674b47859f6, type: 3}
   _spawnPosition: {fileID: 218402369}
   _spawnIntervalSec: 1
+  _objectToSpawn: 0
 --- !u!1001 &1197202557824784362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,7 +527,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!61 &3436466639154579147
 BoxCollider2D:
   m_ObjectHideFlags: 0
