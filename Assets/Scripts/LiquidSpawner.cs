@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LiquidSpawner : MonoBehaviour
@@ -8,25 +9,17 @@ public class LiquidSpawner : MonoBehaviour
     private GameObject _liquidPrefab;
 
     [SerializeField] private Transform _spawnPosition;
-
     [SerializeField] private float _spawnIntervalSec = 1.0f;
 
-    private IEnumerator SpawnParticle()
-    {
-        while (true)
-        {
-            var rotation = Quaternion.identity;
-            var spawnPos = _spawnPosition.position;
-            var particle = Instantiate(_liquidPrefab);
-            particle.transform.position = spawnPos;
-            particle.transform.rotation = rotation;
-            yield return new WaitForSeconds(_spawnIntervalSec);
-        }
-    }
+    [SerializeField] private int _objectToSpawn = 10;
+    
+    private Queue<GameObject> _activeObjects = new Queue<GameObject>();
+    private Stack<GameObject> _inActiveObjects = new Stack<GameObject>();
+    
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnParticle());
+        Debug.Log("D");
     }
 
     // Update is called once per frame
