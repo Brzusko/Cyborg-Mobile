@@ -12,19 +12,8 @@ public class PlayerController : MonoBehaviour
     private Transform _transform = null;
     private Rigidbody2D _rigidbody2D = null;
 
-    private void CalcAcceleration(float deltaTime)
-    {
-        var hRotation = _inputManager.HorizontalRotation;
-        if (hRotation <= 3.13f)
-        {
-            _acceleration = 1.0f;
-        }
-        else
-        {
-            _acceleration = -1.0f;
-        }
-    }
-
+    private Action<float> _calcAcceleration;
+    
     private void ProcessMovement(float deltaTime)
     {
         _rigidbody2D.velocity = new Vector2(_acceleration * _slideSpeed * deltaTime, 0.0f);
@@ -33,11 +22,26 @@ public class PlayerController : MonoBehaviour
     {
         _inputManager = InputManager.instance;
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        if (Input.gyro.enabled)
+            _calcAcceleration = deltaTime =>
+            {
+                var phoneRotation = _inputManager.HorizontalRotation;
+                if (phoneRotation <= 180)
+                {
+                    _acceleration = 1.0f;
+                }
+                else
+                {
+                    _acceleration = -1.0f;
+                }
+            };
+        else
+            _calcAcceleration = deltaTime => _acceleration = _inputManager.HorizontalRotation;
     }
     
     void Update()
     {
-        CalcAcceleration(Time.deltaTime);
+        _calcAcceleration(Time.deltaTime);
     }
 
     private void FixedUpdate()
