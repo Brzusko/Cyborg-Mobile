@@ -378,8 +378,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _liquidPrefab: {fileID: 7475887214676953334, guid: ba029a97ebeb52d4e88e872ffec6d226, type: 3}
   _spawnPosition: {fileID: 218402369}
-  _spawnIntervalSec: 2
-  _objectToSpawn: 4
+  _spawnIntervalSec: 0.4
+  _objectToSpawn: 100
 --- !u!1001 &1197202557824784362
 PrefabInstance:
   m_ObjectHideFlags: 0
