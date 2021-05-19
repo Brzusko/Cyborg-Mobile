@@ -16,4 +16,9 @@ namespace EventArguments
 
         public BallHitType BallHitT { get; set; }
     }
+
+    public class GameEventArg: EventArgs
+    {
+        public uint points { get; set; }
+    }
 }
