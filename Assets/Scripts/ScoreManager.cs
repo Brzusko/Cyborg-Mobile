@@ -1,27 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
-    public uint score = 0;
-    public uint pointValue = 8;
-    public uint hit = 0;
+    public static ScoreManager Instance { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Notifier.OnBallHit += Notifier_OnBallHit;
-    }
+    public uint score;
 
-    void Notifier_OnBallHit(object sender, EventArguments.BallEventArg e)
+    private void Awake()
     {
-        if(e.BallHitT == EventArguments.BallEventArg.BallHitType.PLAYER)
+        if (Instance == null) 
         {
-            hit++;
-            uint time = (uint)(Mathf.Round(DifficultyLevel.time));
-            score += pointValue*(time+1);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }
