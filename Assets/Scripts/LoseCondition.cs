@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class JigsawManager : MonoBehaviour
+public class LoseCondition : MonoBehaviour
 {
     private int lives = 5;
     public GameObject gObject;
@@ -26,6 +27,8 @@ public class JigsawManager : MonoBehaviour
     {
         if(e.BallHitT == EventArguments.BallEventArg.BallHitType.WALL)
         {
+            //Text test = hObjects[0].GetComponent<Text>();
+            //test.text = "Lol xD";
             if(lives > 0)
             {
                 hObjects[lives].SetActive(false);

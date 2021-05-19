@@ -8,7 +8,8 @@ public class PointsManager : MonoBehaviour
 {
     public uint pointValue { get; private set; }
     public static uint points { get; private set; }
-    public Text scoreText;
+    public GameObject textObject;
+
     
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,8 @@ public class PointsManager : MonoBehaviour
         {
             uint time = (uint)(Mathf.Round(DifficultyLevel.time));
             points += pointValue*(time+1);
-            scoreText.text = "Score = "+points.ToString();
+            textObject.GetComponent<Text>().text = points.ToString();
+            
         }
     }
 
