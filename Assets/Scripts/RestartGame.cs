@@ -10,6 +10,7 @@ public class RestartGame : MonoBehaviour
     public GameObject player;
     public GameObject bottle;
     public GameObject textObject;
+    public GameObject loseCondition;
     private List<GameObject> health = new List<GameObject>();
         
     public void Restart()
@@ -27,7 +28,7 @@ public class RestartGame : MonoBehaviour
         bottle.transform.position = new Vector3(-1.29f,5.57f,0f);
         bottle.GetComponent<BottleMovement>().Restart();
         bottle.GetComponent<LiquidSpawner>().Restart();
-        manager.GetComponent<LoseCondition>().Restart();
+        loseCondition.GetComponent<LoseCondition>().Restart();
         this.transform.parent.gameObject.SetActive(false);
     }
 }

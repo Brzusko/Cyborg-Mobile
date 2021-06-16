@@ -9,6 +9,7 @@ public class PointsManager : MonoBehaviour
     public uint pointValue { get; private set; }
     public static uint points { get; private set; }
     public GameObject textObject;
+    public GameObject manager;
 
     public static void Restart(){
         points = 0;
@@ -35,6 +36,6 @@ public class PointsManager : MonoBehaviour
 
     void Notifier_OnGameOver(object sender, EventArguments.GameEventArg e)
     {
-        ScoreManager.Instance.score = e.points;
+        manager.GetComponent<ScoreManager>().score = e.points;
     }
 }
