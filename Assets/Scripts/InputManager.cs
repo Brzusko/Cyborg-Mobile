@@ -62,4 +62,10 @@ public class InputManager : MonoBehaviour
     {
         SwitchGyroState(false);
     }
+
+    private static void Clear() => InputManager._instance = null;
+    public void DestroyManager() {
+        Clear();
+        Destroy(this);
+    }
 }
