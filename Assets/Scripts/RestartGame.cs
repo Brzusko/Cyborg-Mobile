@@ -11,15 +11,9 @@ public class RestartGame : MonoBehaviour
     public GameObject bottle;
     public GameObject textObject;
     public GameObject loseCondition;
-    private List<GameObject> health = new List<GameObject>();
         
     public void Restart()
     {
-        health = manager.GetComponent<LoseCondition>().hObjects;
-        foreach (GameObject heart in health)
-        {
-            heart.SetActive(true);
-        }
         player.SetActive(true);
         DifficultyLevel.Restart();
         PointsManager.Restart();

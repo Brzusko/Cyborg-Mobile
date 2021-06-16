@@ -8,6 +8,8 @@ public static class Notifier
     public static event EventHandler<EventArguments.BallEventArg> OnBallHit;
     public static event EventHandler<EventArguments.GameEventArg> OnGameOver;
 
+    public static event EventHandler<EventArguments.UIEventArg> OnUIUpdate;
+
     #region Event Risers
     private static void OnBallHitHanlder(EventArguments.BallEventArg e)
     {
@@ -17,6 +19,11 @@ public static class Notifier
     private static void OnGameOverHandler(EventArguments.GameEventArg e)
     {
         OnGameOver?.Invoke(null, e);
+    }
+
+    public static void OnUIUpdateInvoker(EventArguments.UIEventArg e)
+    {
+        OnUIUpdate?.Invoke(null, e);
     }
     #endregion
 
