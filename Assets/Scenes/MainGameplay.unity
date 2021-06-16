@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bottleMovementSpeed: 1
-  _startingPoint: 35
+  _startingPoint: 80
 --- !u!114 &1946180202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _liquidPrefab: {fileID: 7475887214676953334, guid: ba029a97ebeb52d4e88e872ffec6d226, type: 3}
   _spawnPosition: {fileID: 218402369}
-  _spawnIntervalSec: 0.4
+  _spawnIntervalSec: 1.5
   _objectToSpawn: 100
 --- !u!1 &2092782079
 GameObject:
