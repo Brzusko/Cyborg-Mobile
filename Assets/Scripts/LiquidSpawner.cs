@@ -15,7 +15,12 @@ public class LiquidSpawner : MonoBehaviour
     private Queue<SuperParticle> _activeObjects = new Queue<SuperParticle>();
     private Stack<SuperParticle> _inActiveObjects = new Stack<SuperParticle>();
     private Coroutine _spawnLogic;
+    public bool gameOver = false;
     
+    public void Restart(){
+        gameOver = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +51,17 @@ public class LiquidSpawner : MonoBehaviour
     {
         while (_inActiveObjects.Count != 0)
         {
-            yield return new WaitForSeconds(_spawnIntervalSec);
-            var particleToActive = _inActiveObjects.Pop();
-            particleToActive.Active(_spawnPosition.position);
-            _activeObjects.Enqueue(particleToActive);
+            if (!gameOver)
+            {
+                yield return new WaitForSeconds(_spawnIntervalSec);
+                if (!gameOver)
+                {
+                    var particleToActive = _inActiveObjects.Pop();
+                    particleToActive.Active(_spawnPosition.position);
+                    _activeObjects.Enqueue(particleToActive);
+                }
+            }
+            else yield return new WaitForSeconds(0.05f);
         }
     }
     private void OnDestroy()

@@ -10,6 +10,9 @@ public class PointsManager : MonoBehaviour
     public static uint points { get; private set; }
     public GameObject textObject;
 
+    public static void Restart(){
+        points = 0;
+    }
     
     // Start is called before the first frame update
     void Start()

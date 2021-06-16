@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EventArguments;
 
 public class LoseCondition : MonoBehaviour
 {
@@ -10,9 +12,15 @@ public class LoseCondition : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject player;
     private Transform[] hearts; 
-    private List<GameObject> hObjects = new List<GameObject>();
+    public List<GameObject> hObjects = new List<GameObject>();
     private bool gameOver;
+    public GameObject bottle;
     // Start is called before the first frame update
+    public void Restart(){
+        lives = 5;
+        gameOver = false;
+    }
+    
     void Start()
     {
         hearts = gObject.GetComponentsInChildren<Transform>();
@@ -40,6 +48,8 @@ public class LoseCondition : MonoBehaviour
                 gameOverScreen.SetActive(true);
                 player.SetActive(false);
                 gameOver = true;
+                bottle.GetComponent<LiquidSpawner>().gameOver = gameOver;
+                bottle.GetComponent<BottleMovement>().gameOver = Convert.ToInt32(!gameOver);
             }
         }
     }
