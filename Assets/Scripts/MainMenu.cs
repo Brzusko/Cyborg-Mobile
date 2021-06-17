@@ -9,6 +9,10 @@ public class MainMenu : MonoBehaviour
         MainGameplay
     }
 
-    public void OnStartClick() => SceneManager.LoadScene(Scenes.MainGameplay.ToString(), LoadSceneMode.Single);
+    public void OnStartClick()
+    {
+        this.GetComponent<ResetVariables>().RestartVars();
+        SceneManager.LoadScene(Scenes.MainGameplay.ToString(), LoadSceneMode.Single);
+    } 
     public void OnExitClick() => Application.Quit();
 }

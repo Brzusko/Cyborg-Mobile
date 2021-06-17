@@ -21,4 +21,15 @@ namespace EventArguments
     {
         public uint points { get; set; }
     }
+
+    public class UIEventArg: EventArgs {
+        public enum WhichUI {
+            HEARTHS,
+            COINS
+        }
+        public uint Coins { get; set; }
+        public int Lives { get; set; }
+
+        public WhichUI UIType { get; set; }
+    }
 }

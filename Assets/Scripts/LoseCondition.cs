@@ -1,25 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EventArguments;
 
 public class LoseCondition : MonoBehaviour
 {
-    private int lives = 5;
+    private static LoseCondition _instance = null;
+    public int Lives { get => _lives;}
+
+    public static LoseCondition Instance {
+        get
+        {
+            if (!_instance) throw new NullReferenceException();
+            return _instance;
+        }
+    }
+    public int _lives = 5;
     public GameObject gObject;
-    public GameObject gameOverScreen;
-    public GameObject player;
-    private Transform[] hearts; 
-    private List<GameObject> hObjects = new List<GameObject>();
-    private bool gameOver;
-    // Start is called before the first frame update
+    private bool gameOver = false;
+    public GameObject bottle;
+    public void Restart(){
+        _lives = 5;
+        gameOver = false;
+    }
+    
+    private void Awake() 
+    {
+
+        if (_instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(this);    
+    }
+
     void Start()
     {
-        hearts = gObject.GetComponentsInChildren<Transform>();
-        foreach (Transform child in hearts)
-        { 
-            hObjects.Add(child.gameObject);
-        }
         Notifier.OnBallHit += Notifier_OnBallHit;
     }
 
@@ -27,18 +48,13 @@ public class LoseCondition : MonoBehaviour
     {
         if(e.BallHitT == EventArguments.BallEventArg.BallHitType.WALL)
         {
-            //Text test = hObjects[0].GetComponent<Text>();
-            //test.text = "Lol xD";
-            if(lives > 0)
-            {
-                hObjects[lives].SetActive(false);
-                lives--;
-            }
-
-            if(lives == 0 && !gameOver){
+            _lives -= 1;
+            Notifier.OnUIUpdateInvoker(new UIEventArg {
+                Lives = _lives,
+                UIType = UIEventArg.WhichUI.HEARTHS
+            });
+            if(_lives == 0 && !gameOver){
                 Notifier.GameOver(PointsManager.points);
-                gameOverScreen.SetActive(true);
-                player.SetActive(false);
                 gameOver = true;
             }
         }
