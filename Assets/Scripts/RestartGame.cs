@@ -18,7 +18,7 @@ public class RestartGame : MonoBehaviour
         PointsManager.Restart();
         textObject.GetComponent<Text>().text = PointsManager.points.ToString();
         player.transform.position = new Vector3(0.02f,-4.66f,0f);
-        bottle.transform.position = new Vector3(-1.29f,5.57f,0f);
+        bottle.transform.position = new Vector3(-0.5187f,4.8517f,0f);
         LoseCondition.Instance.Restart();
         Notifier.OnUIUpdateInvoker(new UIEventArg {
                 Lives = -1,
