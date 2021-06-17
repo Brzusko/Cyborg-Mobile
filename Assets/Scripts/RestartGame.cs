@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using EventArguments;
 
 public class RestartGame : MonoBehaviour
 {
-    public GameObject manager;
     public GameObject player;
     public GameObject bottle;
     public GameObject textObject;
@@ -14,15 +14,19 @@ public class RestartGame : MonoBehaviour
         
     public void Restart()
     {
-        player.SetActive(true);
         DifficultyLevel.Restart();
         PointsManager.Restart();
         textObject.GetComponent<Text>().text = PointsManager.points.ToString();
         player.transform.position = new Vector3(0.02f,-4.66f,0f);
         bottle.transform.position = new Vector3(-1.29f,5.57f,0f);
+        LoseCondition.Instance.Restart();
+        Notifier.OnUIUpdateInvoker(new UIEventArg {
+                Lives = -1,
+                UIType = UIEventArg.WhichUI.HEARTHS
+        });
+        this.transform.gameObject.SetActive(false);
         bottle.GetComponent<BottleMovement>().Restart();
         bottle.GetComponent<LiquidSpawner>().Restart();
-        loseCondition.GetComponent<LoseCondition>().Restart();
-        this.transform.parent.gameObject.SetActive(false);
+        player.SetActive(true);
     }
 }

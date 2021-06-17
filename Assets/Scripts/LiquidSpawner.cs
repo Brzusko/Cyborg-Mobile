@@ -61,7 +61,7 @@ public class LiquidSpawner : MonoBehaviour
                     _activeObjects.Enqueue(particleToActive);
                 }
             }
-            else yield return new WaitForSeconds(0.05f);
+            else yield return new WaitForSeconds(0.1f);
         }
     }
     private void OnDestroy()

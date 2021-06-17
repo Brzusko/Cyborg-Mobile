@@ -28,7 +28,7 @@ namespace EventArguments
             COINS
         }
         public uint Coins { get; set; }
-        public uint Lives { get; set; }
+        public int Lives { get; set; }
 
         public WhichUI UIType { get; set; }
     }

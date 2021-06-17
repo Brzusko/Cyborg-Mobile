@@ -17,11 +17,9 @@ public class LoseCondition : MonoBehaviour
             return _instance;
         }
     }
-    private int _lives = 5;
+    public int _lives = 5;
     public GameObject gObject;
-    public GameObject gameOverScreen;
-    public GameObject player; 
-    private bool gameOver;
+    private bool gameOver = false;
     public GameObject bottle;
     public void Restart(){
         _lives = 5;
@@ -48,20 +46,16 @@ public class LoseCondition : MonoBehaviour
 
     void Notifier_OnBallHit(object sender, EventArguments.BallEventArg e)
     {
-        _lives -= 1;
-        Notifier.OnUIUpdateInvoker(new UIEventArg {
-            Lives = (uint)_lives,
-            UIType = UIEventArg.WhichUI.HEARTHS
-        });
         if(e.BallHitT == EventArguments.BallEventArg.BallHitType.WALL)
         {
+            _lives -= 1;
+            Notifier.OnUIUpdateInvoker(new UIEventArg {
+                Lives = _lives,
+                UIType = UIEventArg.WhichUI.HEARTHS
+            });
             if(_lives == 0 && !gameOver){
                 Notifier.GameOver(PointsManager.points);
-                gameOverScreen.SetActive(true);
-                player.SetActive(false);
                 gameOver = true;
-                bottle.GetComponent<LiquidSpawner>().gameOver = gameOver;
-                bottle.GetComponent<BottleMovement>().gameOver = Convert.ToInt32(!gameOver);
             }
         }
     }
